@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Truzone - Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="page">
+    <!-- SIGNUP FORM -->
+    <div class="signup-container" id="signup-form">
+      <h2 class="title">Sign Up</h2>
+
+      <div class="name-fields">
+        <input type="text" placeholder="First Name" class="input half" id="first-name">
+        <input type="text" placeholder="Last Name" class="input half" id="last-name">
+      </div>
+
+      <input type="email" placeholder="Email" class="input" id="email">
+
+      <div class="password-field">
+        <input type="password" placeholder="Password" class="input" id="password">
+        <span class="toggle" onclick="togglePassword('password', this)">Show</span>
+      </div>
+
+      <div class="password-field">
+        <input type="password" placeholder="Confirm Password" class="input" id="confirm-password">
+        <span class="toggle" onclick="togglePassword('confirm-password', this)">Show</span>
+      </div>
+
+      <div class="checkbox">
+        <input type="checkbox" id="agree">
+        <label for="agree"> I Agree with 
+          <a href="privacy.html" class="link">privacy</a> and 
+          <a href="policy.html" class="link">policy</a>
+        </label>
+      </div>
+
+      <button class="signup-btn" id="signup-btn">Sign up</button>
+
+      <p class="signin-text">
+        Already have an account? <a href="login.html">login</a>
+      </p>
+    </div>
+
+<!-- VERIFICATION FORM (HIDDEN BY DEFAULT) -->
+<div class="verification-container" id="verification-form" style="display: none;">
+  <h2 class="title">Verify Your Account</h2>
+  <p class="instruction">
+    Check your inbox or messages and enter the 6-digit code we sent to <span id="user-email"></span>.
+  </p>
+
+  <input type="text" maxlength="6" class="input verification-input" id="verification-code" placeholder="Enter 6-digit code">
+
+  <button class="verify-btn" id="verify-btn">Verify</button>
+  
+  <p class="resend-text">
+    Didn’t receive a code? 
+    <span id="resend-timer">10s</span> 
+    <a href="#" id="resend-code" style="pointer-events: none; opacity: 0.5;">Resend</a>
+  </p>
+</div>
+  <!-- Spinner overlay -->
+  <div id="spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="signup.js"></script>
+</body>
+</html>

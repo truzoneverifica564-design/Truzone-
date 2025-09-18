@@ -1,0 +1,205 @@
+/* Remove all tap highlights on mobile very strongly */
+* {
+  -webkit-tap-highlight-color: transparent !important; /* iOS & Android Chrome */
+  -moz-tap-highlight-color: transparent !important;    /* Firefox mobile (rare) */
+  -ms-tap-highlight-color: transparent !important;     /* IE mobile */
+  tap-highlight-color: transparent !important;         /* future-proof */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000000; /* Dark background */
+  color: white;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: block; /* stop flex dragging issue */
+  padding: 40px 20px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* align from top */
+  min-height: 100vh;
+}
+
+.signup-container,
+.verification-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.name-fields {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.input,
+.code-input {
+  width: 100%;
+  padding: 25px;
+  border-radius: 50px; /* round edges */
+  background: #111; /* subtle dark background inside */
+  color: white;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 18px;
+  border: 2px solid #333; /* neutral border */
+  transition: all 0.3s ease-in-out;
+  text-align: center; /* center text for code inputs */
+}
+
+.input:focus,
+.code-input:focus {
+  border-color: #ff2d75; /* pink focus */
+  box-shadow: 0 0 8px rgba(255, 45, 117, 0.7);
+}
+
+.input::placeholder {
+  color: #888;
+}
+
+/* Password field with "Show" button */
+.password-field {
+  position: relative;
+}
+
+.toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff2d75;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.checkbox {
+  font-size: 13px;
+  margin: 10px 0 20px;
+}
+
+.checkbox label {
+  color: #aaa;
+}
+
+.link {
+  color: #ff2d75;
+  cursor: pointer;
+}
+
+.signup-btn,
+.verify-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #ff2d75, #8a2be2);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.signup-btn:hover,
+.verify-btn:hover {
+  box-shadow: 0 0 10px rgba(255, 45, 117, 0.8);
+}
+
+.signin-text,
+.resend-text {
+  font-size: 14px;
+  text-align: center;
+  color: #aaa;
+}
+
+.signin-text a,
+.resend-text a {
+  color: #ff2d75;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.code-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#resend-timer {
+  font-weight: bold;
+  color: #ff2d75;
+  margin-left: 5px;
+}
+
+.verification-container .instruction {
+  margin-bottom: 25px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+}
+
+input, textarea {
+  font-size: 16px; /* stops iOS zoom on focus */
+}
+
+/* Spinner overlay */
+#spinner {
+  display: none; /* hide initially */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4); /* overlay */
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner small circle with Truzone gradient */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid transparent;
+  border-top: 4px solid #00BFFF; /* blue start */
+  border-radius: 50%;
+  animation: spin 1s linear infinite, colorShift 2s linear infinite;
+}
+
+/* Spin rotation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Gradient color shift animation */
+@keyframes colorShift {
+  0% { border-top-color: #00BFFF; }   /* blue */
+  33% { border-top-color: #FF69B4; }  /* pink */
+  66% { border-top-color: #800080; }  /* purple */
+  100% { border-top-color: #00BFFF; } /* back to blue */
+}
