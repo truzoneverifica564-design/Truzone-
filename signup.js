@@ -1,3 +1,24 @@
+// ✅ Notification function
+function showNotification(message, type = "info") {
+  let notify = document.getElementById("notify");
+
+  // Create element if not exist
+  if (!notify) {
+    notify = document.createElement("div");
+    notify.id = "notify";
+    notify.className = "notification";
+    document.body.appendChild(notify);
+  }
+
+  notify.textContent = message;
+  notify.className = `notification ${type} show`;
+
+  // Auto hide after 3s
+  setTimeout(() => {
+    notify.classList.remove("show");
+  }, 3000);
+}
+
 // Toggle password visibility
 function togglePassword(id, el) {
   const input = document.getElementById(id);
@@ -30,6 +51,8 @@ const verifyBtn = document.getElementById('verify-btn');
 const codeInputs = document.querySelectorAll('.code-input');
 const resendLink = document.getElementById('resend-code');
 
+let resendTimer = null; // store interval timer
+
 // Simulate token check
 const token = localStorage.getItem('token');
 if (token) {
@@ -45,24 +68,21 @@ signupBtn.addEventListener('click', () => {
   const password = document.getElementById('password').value.trim();
   const confirmPassword = document.getElementById('confirm-password').value.trim();
 
-  // Validation
   if (!firstName || !lastName || !email || !password || !confirmPassword) {
-    alert("Please fill all fields!");
+    showNotification("Please fill all fields!", "warning");
     return;
   }
   if (!/^\S+@\S+\.\S+$/.test(email)) {
-    alert("Please enter a valid email!");
+    showNotification("Please enter a valid email!", "error");
     return;
   }
   if (password !== confirmPassword) {
-    alert("Passwords do not match!");
+    showNotification("Passwords do not match!", "error");
     return;
   }
 
-  // Show spinner
   spinner.style.display = 'flex';
 
-  // Simulate server delay and show verification
   setTimeout(() => {
     spinner.style.display = 'none';
     signupForm.style.display = 'none';
@@ -70,6 +90,7 @@ signupBtn.addEventListener('click', () => {
     userEmailSpan.textContent = email;
     codeInputs[0].focus();
     startResendCountdown();
+    showNotification("Verification code sent to your email 📩", "info");
   }, 2000);
 });
 
@@ -91,39 +112,42 @@ codeInputs.forEach((input, index) => {
 verifyBtn.addEventListener('click', () => {
   const code = Array.from(codeInputs).map(i => i.value).join('');
   if (code.length < 6) {
-    alert("Enter the full 6-digit code.");
+    showNotification("Enter the full 6-digit code!", "warning");
     return;
   }
 
   spinner.style.display = 'flex';
   setTimeout(() => {
     spinner.style.display = 'none';
-    alert("Verification successful! Account activated.");
+    showNotification("Verification successful ✅ Account activated!", "success");
     localStorage.setItem('token', 'demo-token');
     // window.location.href = "dashboard.html";
   }, 2000);
 });
 
 // RESEND CODE CLICK WITH 20-SECOND COUNTDOWN
-let countdown = 20;
 function startResendCountdown() {
+  // Clear any previous timer
+  if (resendTimer) clearInterval(resendTimer);
+
+  let countdown = 20;
   resendLink.style.pointerEvents = 'none';
   resendLink.textContent = `Resend (${countdown}s)`;
 
-  const timer = setInterval(() => {
+  resendTimer = setInterval(() => {
     countdown--;
     resendLink.textContent = `Resend (${countdown}s)`;
     if (countdown <= 0) {
-      clearInterval(timer);
+      clearInterval(resendTimer);
       resendLink.textContent = "Resend";
       resendLink.style.pointerEvents = 'auto';
-      countdown = 10; // reset for next time
     }
   }, 1000);
 }
 
+// Resend link click
 resendLink.addEventListener('click', (e) => {
   e.preventDefault();
-  alert("Verification code resent to your email!");
-  startResendCountdown();
+  showNotification("New verification code sent 📩", "info");
+  startResendCountdown(); // restart countdown
 });
