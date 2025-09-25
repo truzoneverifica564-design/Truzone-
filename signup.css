@@ -1,9 +1,18 @@
-/* Remove all tap highlights on mobile very strongly */
+/* 🔥 Strongest Mobile Clean UX Setup 🔥 */
 * {
   -webkit-tap-highlight-color: transparent !important; /* iOS & Android Chrome */
-  -moz-tap-highlight-color: transparent !important;    /* Firefox mobile (rare) */
-  -ms-tap-highlight-color: transparent !important;     /* IE mobile */
-  tap-highlight-color: transparent !important;         /* future-proof */
+  -moz-tap-highlight-color: transparent !important;    
+  -ms-tap-highlight-color: transparent !important;     
+  tap-highlight-color: transparent !important;         
+  outline: none !important;            /* Remove blue outline */
+  -webkit-focus-ring-color: transparent !important; /* Safari focus ring */
+}
+
+body {
+  -webkit-user-select: none !important; /* Prevent text selection */
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
 }
 
 * {
@@ -202,4 +211,52 @@ input, textarea {
   33% { border-top-color: #FF69B4; }  /* pink */
   66% { border-top-color: #800080; }  /* purple */
   100% { border-top-color: #00BFFF; } /* back to blue */
+}
+
+/* Notification Container */
+.notification {
+  position: fixed;
+  top: 20px; /* change to bottom:20px; if you want bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 280px;
+  max-width: 400px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  background: #222; /* Default background */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Show state */
+.notification.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Success style */
+.notification.success {
+  background: #2ecc71; /* Green */
+}
+
+/* Error style */
+.notification.error {
+  background: #e74c3c; /* Red */
+}
+
+/* Info style */
+.notification.info {
+  background: #3498db; /* Blue */
+}
+
+/* Warning style */
+.notification.warning {
+  background: #f39c12; /* Orange */
 }
