@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Truzone — Policy</title>
+  <meta name="description" content="Truzone Community Policy — Rules, conduct, safety, IP, enforcement and more." />
+  <style>
+    :root{
+      --bg:#071428;
+      --card:#071827;
+      --accent:#7C3AED;
+      --muted:#98A8B9;
+      --text:#EAF2FB;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --max-width:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background: linear-gradient(180deg,#041223 0%, #071428 100%);
+      color:var(--text);
+      padding:28px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      min-height:100vh;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:calc(var(--radius) + 6px);
+      padding:20px;
+      box-shadow:0 12px 40px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:12px;
+    }
+
+    .brand{ display:flex; gap:12px; align-items:center; }
+    .logo{
+      width:56px; height:56px; border-radius:12px;
+      background: linear-gradient(135deg,var(--accent),#3B82F6);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; color:white; font-size:18px;
+      box-shadow: 0 8px 26px rgba(124,58,237,0.16);
+    }
+
+    h1{ margin:0; font-size:20px }
+    .meta{ color:var(--muted); font-size:13px }
+
+    .controls{ display:flex; gap:8px; align-items:center }
+    .btn{
+      border:0; padding:8px 12px; border-radius:10px;
+      background:var(--glass); color:var(--text); cursor:pointer; font-size:13px;
+      display:inline-flex; gap:8px; align-items:center;
+      transition:transform .06s ease, background .12s;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+    }
+    .btn:hover{ transform:translateY(-2px) }
+    .btn.primary{ background:linear-gradient(90deg,var(--accent),#3B82F6); font-weight:600 }
+
+    .toolbar{ display:flex; gap:10px; margin:14px 0; flex-wrap:wrap; align-items:center }
+    .search-wrap{ flex:1 1 320px; display:flex; gap:8px; align-items:center }
+    input.search{
+      flex:1; padding:10px 12px; background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03); color:var(--text); border-radius:10px; outline:none;
+      font-size:14px;
+    }
+
+    .policy{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.02);
+    }
+
+    details{
+      background:rgba(0,0,0,0.14); border-radius:10px; margin:10px 0; padding:12px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    details[open]{ box-shadow: 0 10px 30px rgba(2,6,23,0.45) }
+    summary{
+      list-style:none; cursor:pointer; font-weight:700; font-size:15px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    summary::-webkit-details-marker{ display:none }
+
+    .section-body{ margin-top:10px; color:var(--muted); font-size:14px; line-height:1.55 }
+
+    footer{ margin-top:18px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:13px }
+
+    mark.tr-highlight{ background:yellow; color:#000; padding:0 2px; border-radius:2px }
+
+    @media (max-width:640px){
+      .logo{ width:44px; height:44px; font-size:16px }
+      .container{ padding:14px }
+      header{ flex-direction:column; align-items:flex-start; gap:10px }
+      .search-wrap{ flex-basis:100% }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="page-title">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">TZ</div>
+        <div>
+          <h1 id="page-title">Truzone — Community Policy</h1>
+          <div class="meta">Rules, conduct, safety, IP, enforcement and how we run Truzone</div>
+          <div class="meta" style="margin-top:6px">Last updated: <span id="lastUpdated">[Put date here]</span></div>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <button class="btn" id="printBtn" title="Print policy">🖨 Print</button>
+        <button class="btn" id="downloadBtn" title="Download policy (TXT)">⬇ Download</button>
+        <button class="btn primary" id="copyBtn" title="Copy policy to clipboard">📋 Copy</button>
+      </div>
+    </header>
+
+    <div class="toolbar" role="region" aria-label="Policy tools">
+      <div class="search-wrap">
+        <input type="search" id="searchInput" class="search" placeholder="Search inside the policy (e.g., 'harassment', 'suspend', 'IP')" aria-label="Search policy text" />
+        <div class="meta" id="searchCount" aria-live="polite"></div>
+      </div>
+      <div class="meta" style="align-self:center">Printable · Copyable · Downloadable</div>
+    </div>
+
+    <article class="policy" id="policyArticle" lang="en">
+      <section aria-labelledby="intro-heading">
+        <strong id="intro-heading" style="font-size:15px">Truzone — Full Policy</strong>
+        <p class="section-body" style="margin-top:10px">
+          Welcome to Truzone. This Policy sets the rules for how users should behave, what content is allowed, and how Truzone enforces safety and rights on the platform.
+          By using Truzone you agree to follow this Policy. Truzone reserves the right to remove content, suspend accounts, and take other actions necessary to keep the community safe.
+        </p>
+      </section>
+
+      <details open>
+        <summary><span>1. User Responsibilities</span><span class="meta">Age • Account safety • Accuracy</span></summary>
+        <div class="section-body">
+          <p><strong>Eligibility:</strong> Users must be at least 13 years old. If local law requires a higher minimum age, that higher age applies.</p>
+
+          <p><strong>Account information:</strong> Provide accurate information when registering and keep your account credentials secure. You are responsible for all activity from your account. Do not share your password or sell/transfer your account.</p>
+
+          <p><strong>Reporting:</strong> If you suspect unauthorized access to your account or a security issue, report it immediately through the app's support tools.</p>
+
+          <p><strong>Compliance:</strong> You must comply with applicable laws when using Truzone, including intellectual property, privacy, and export rules.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>2. Permitted Content</span><span class="meta">What you may post</span></summary>
+        <div class="section-body">
+          <p>Truzone supports creative expression and allows users to post photos, videos, text, audio, and other content that conforms to this Policy.</p>
+
+          <p><strong>Allowed examples:</strong></p>
+          <ul>
+            <li>Personal updates, original photos and videos, commentary, reviews, and educational content.</li>
+            <li>Non-commercial and commercial posts that are honest and lawful.</li>
+            <li>Memes, artwork, and original music you own or have rights to share.</li>
+          </ul>
+
+          <p>When in doubt, assume you should have permission to post content that involves other peoples’ work or private information.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>3. Prohibited Content</span><span class="meta">What you cannot post</span></summary>
+        <div class="section-body">
+          <p>The following content is strictly prohibited on Truzone and may lead to removal, suspension, or account termination:</p>
+          <ul>
+            <li><strong>Violence & threats:</strong> Direct threats, praise or promotion of violent acts, or graphic depictions intended to shock or incite.</li>
+            <li><strong>Hate speech:</strong> Attacks or slurs against individuals or groups based on protected characteristics (race, religion, gender, sexual orientation, nationality, disability, etc.).</li>
+            <li><strong>Harassment & bullying:</strong> Repeated targeting, doxxing, or malicious harassment of an individual.</li>
+            <li><strong>Sexual & explicit content:</strong> Pornography, sexual exploitation, or sexual content involving minors.</li>
+            <li><strong>Illegal activities:</strong> Content that promotes or facilitates illegal conduct, drug trafficking, human trafficking, or terrorism.</li>
+            <li><strong>Self-harm & suicide promotion:</strong> Content that encourages or instructs self-harm or suicide.</li>
+            <li><strong>Spam & scams:</strong> Unsolicited mass messages, fraudulent schemes, phishing links, and misleading commercial claims.</li>
+            <li><strong>Malware & hacking:</strong> Content that distributes malware, instructions for hacking, or tools for wrongdoing.</li>
+            <li><strong>Intellectual property infringement:</strong> Posting copyrighted works you do not own or lack permission to share (music, movies, games, images).</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>4. Community Conduct</span><span class="meta">Respect • No impersonation • Civil discourse</span></summary>
+        <div class="section-body">
+          <p><strong>Respectful interaction:</strong> Treat other users with dignity. Heated debate is allowed, but harassment and threats are not.</p>
+
+          <p><strong>No impersonation:</strong> Do not impersonate other people, brands, public figures, or create fake accounts to mislead others.</p>
+
+          <p><strong>Constructive reporting:</strong> Use the reporting tools to flag policy violations; do not use reporting to silence legitimate speech.</p>
+
+          <p><strong>Public vs private:</strong> Avoid sharing other people’s private or confidential information publicly (phone numbers, addresses, financial data) — this may be removed and could result in enforcement.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>5. Intellectual Property</span><span class="meta">Your rights • Our license</span></summary>
+        <div class="section-body">
+          <p><strong>Your ownership:</strong> You retain ownership of content you create and post to Truzone, including text, photos, and videos.</p>
+
+          <p><strong>License to Truzone:</strong> By posting content you grant Truzone a non-exclusive, worldwide, royalty-free license to host, display, and distribute that content solely to operate and promote the service. This license ends when you remove the content, subject to caching and legal retention requirements.</p>
+
+          <p><strong>Copyright complaints:</strong> If you believe your copyrighted work has been used without permission, use our copyright takedown process. We will respond to valid notices under applicable law and may remove or disable access to infringing content.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>6. Safety & Enforcement</span><span class="meta">Monitoring • Actions • Appeals</span></summary>
+        <div class="section-body">
+          <p><strong>Enforcement actions:</strong> Truzone may warn, remove content, restrict features, temporarily suspend, or permanently terminate accounts depending on violation severity and history.</p>
+
+          <p><strong>Automated tools & human review:</strong> We use a combination of automated detection and human review to find and respond to policy violations. Automated systems help scale detection but may make mistakes; appeals are available for many enforcement actions.</p>
+
+          <p><strong>Urgent threats:</strong> For content that signals immediate danger to life or public safety, we may escalate to law enforcement when required by law.</p>
+
+          <p><strong>Repeat offenses:</strong> Repeated or severe violations increase the likelihood of permanent suspension.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>7. Advertising, Promotions & Monetization</span><span class="meta">Ads • Sponsored content • Payments</span></summary>
+        <div class="section-body">
+          <p><strong>Ads & sponsored posts:</strong> Truzone may display advertising or allow sponsored content. Advertisers must follow advertising rules and applicable laws. Sponsored posts should be clearly disclosed when required.</p>
+
+          <p><strong>Monetization features:</strong> If Truzone offers tipping, paid subscriptions, or other monetization, users must comply with platform rules and payment provider terms. Truzone may take a commission or fee from transactions as published in-app.</p>
+
+          <p><strong>Prohibited promotions:</strong> Promotions that are fraudulent, misleading, promote illegal activity, or violate intellectual property rules are banned.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>8. Account Suspension & Termination</span><span class="meta">When we act • Your options</span></summary>
+        <div class="section-body">
+          <p><strong>Grounds for action:</strong> Accounts may be suspended or terminated for violations including: posting prohibited content, serious harassment, repeated copyright infringement, engaging in fraud, or evading prior enforcement.</p>
+
+          <p><strong>Temporary restrictions:</strong> For less severe violations we may impose temporary feature limits (commenting, posting, messaging).</p>
+
+          <p><strong>Appeals:</strong> Some enforcement actions can be appealed. When an appeal is available, instructions will be provided in-app or by email. Appeals are reviewed and may result in reversal if we find an error.</p>
+
+          <p><strong>Account deletion:</strong> You may delete your account at any time. Deletion removes your profile and personal data subject to our retention rules (see Privacy for details).</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>9. Law Enforcement & Legal Requests</span><span class="meta">Compliance • Data requests</span></summary>
+        <div class="section-body">
+          <p><strong>Legal requests:</strong> Truzone may disclose information in response to valid legal processes, such as subpoenas, court orders, or to comply with law enforcement when necessary.</p>
+
+          <p><strong>Transparency:</strong> Where legally permitted, Truzone will attempt to notify users about requests for their data and provide an opportunity to object, unless prohibited by law.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>10. Changes to the Policy</span><span class="meta">Updates • Notice</span></summary>
+        <div class="section-body">
+          <p>Truzone may update this Policy as the platform evolves. We will post changes in the app and update the “Last updated” date. For material changes we will give notice by email or in-app messaging.</p>
+
+          <p>Continued use of Truzone after such updates means you accept the updated terms.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>11. Reporting & Support</span><span class="meta">How to report • Response</span></summary>
+        <div class="section-body">
+          <p><strong>Report tools:</strong> Use the in-app reporting tools to flag content or accounts that violate this Policy. Provide as much detail as possible (screenshots, links, descriptions).</p>
+
+          <p><strong>Response times:</strong> We prioritize reports that involve imminent harm, child safety, or criminal activity. Non-urgent reports will be handled in the order received; response times vary.</p>
+
+          <p><strong>Contact:</strong> For additional help contact our support email: <strong>support@truzone.example</strong></p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span>12. Miscellaneous</span><span class="meta">Jurisdiction • Interpretation</span></summary>
+        <div class="section-body">
+          <p><strong>Governing law:</strong> This Policy is governed by the laws of the jurisdiction in which Truzone operates. Where local consumer protections provide additional rights, those rights will apply.</p>
+
+          <p><strong>Severability:</strong> If a court finds any provision of this Policy invalid, the remaining provisions remain in effect.</p>
+
+          <p><strong>Contact & feedback:</strong> Send policy questions or feedback to <strong>policy@truzone.example</strong>.</p>
+        </div>
+      </details>
+
+      <div style="margin-top:14px; color:var(--muted); font-size:13px">
+        <strong>Note:</strong> This is Truzone’s complete community Policy document. Combine it with the Privacy statement when publishing to app stores, websites, or help centers.
+      </div>
+    </article>
+
+    <footer>
+      <div class="meta">Truzone · Community Policy</div>
+      <div class="meta">© <span id="currentYear"></span> Truzone</div>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const lastUpdatedEl = document.getElementById('lastUpdated');
+      const yearEl = document.getElementById('currentYear');
+      const today = new Date();
+      lastUpdatedEl.textContent = '[Put date here]';
+      yearEl.textContent = today.getFullYear();
+    })();
+
+    // Copy policy text to clipboard
+    document.getElementById('copyBtn').addEventListener('click', async function(){
+      const article = document.getElementById('policyArticle');
+      const text = article.innerText.replace(/\s+$/m, '\n');
+      try{
+        await navigator.clipboard.writeText(text);
+        this.textContent = '✅ Copied';
+        setTimeout(()=> this.textContent = '📋 Copy', 1500);
+      }catch(e){
+        alert('Copy failed — please select and copy manually.');
+      }
+    });
+
+    // Download as .txt
+    document.getElementById('downloadBtn').addEventListener('click', function(){
+      const article = document.getElementById('policyArticle');
+      const text = article.innerText.replace(/\s+$/m, '\n');
+      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'truzone-policy.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      this.textContent = '⬇ Saved';
+      setTimeout(()=> this.textContent = '⬇ Download', 1300);
+    });
+
+    // Print
+    document.getElementById('printBtn').addEventListener('click', function(){
+      window.print();
+    });
+
+    // Search inside policy
+    const searchInput = document.getElementById('searchInput');
+    const searchCountEl = document.getElementById('searchCount');
+
+    searchInput.addEventListener('input', function(){
+      const q = (this.value || '').trim();
+      const details = Array.from(document.querySelectorAll('details'));
+      // Remove previous highlights
+      document.querySelectorAll('mark.tr-highlight').forEach(n=> {
+        const parent = n.parentNode;
+        parent.replaceChild(document.createTextNode(n.textContent), n);
+      });
+
+      if(!q){
+        searchCountEl.textContent = '';
+        details.forEach(d=> d.open = false);
+        return;
+      }
+
+      const regex = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'ig');
+      let total = 0;
+      details.forEach(d=>{
+        const body = d.querySelector('.section-body');
+        if(!body) return;
+        const orig = body.textContent;
+        const matches = (orig.match(regex) || []).length;
+        if(matches > 0){
+          d.open = true;
+          total += matches;
+          const highlighted = orig.replace(regex, match => `<mark class="tr-highlight">${match}</mark>`);
+          body.innerHTML = highlighted.replace(/\n/g, '<br/>');
+        } else {
+          body.textContent = orig;
+        }
+      });
+
+      searchCountEl.textContent = total ? total + ' match' + (total>1 ? 'es' : '') : 'No matches';
+    });
+
+    // Keyboard accessibility for summary
+    document.querySelectorAll('summary').forEach(s=>{
+      s.tabIndex = 0;
+      s.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          const d = this.parentElement;
+          d.open = !d.open;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

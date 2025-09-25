@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Truzone — Privacy</title>
+  <meta name="description" content="Truzone Privacy Statement — Detailed privacy information for the Truzone social media app." />
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#7C3AED;
+      --muted:#94A3B8;
+      --text:#E6EEF8;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --max-width:980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071028 0%, #071826 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      gap:20px;
+      min-height:100%;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:calc(var(--radius) + 6px);
+      padding:20px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .logo{
+      width:54px;
+      height:54px;
+      border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #3B82F6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:white;
+      font-size:18px;
+      box-shadow: 0 6px 18px rgba(124,58,237,0.18), inset 0 -6px 18px rgba(255,255,255,0.02);
+    }
+
+    h1{
+      margin:0;
+      font-size:20px;
+      line-height:1;
+      letter-spacing:0.2px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      padding:8px 12px;
+      border-radius:10px;
+      background:var(--glass);
+      color:var(--text);
+      cursor:pointer;
+      font-size:13px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      transition:transform .06s ease, background .12s ease;
+      box-shadow: 0 4px 12px rgba(2,6,23,0.4);
+    }
+    .btn:hover{ transform:translateY(-2px) }
+    .btn.primary{
+      background: linear-gradient(90deg, var(--accent), #3B82F6);
+      font-weight:600;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      margin:14px 0 20px 0;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .search-wrap{
+      flex:1 1 320px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    input.search{
+      flex:1;
+      padding:10px 12px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--text);
+      border-radius:10px;
+      outline:none;
+      font-size:14px;
+    }
+
+    .policy{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border-radius:12px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .intro{
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .lead{
+      flex:1;
+      font-size:15px;
+      color:var(--text);
+    }
+
+    .last-updated{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:8px;
+    }
+
+    details{
+      background:rgba(0,0,0,0.18);
+      border-radius:10px;
+      margin:10px 0;
+      padding:12px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    details[open]{ box-shadow: 0 8px 30px rgba(2,6,23,0.5) }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:15px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    summary::-webkit-details-marker {display:none}
+
+    .section-body{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-top:12px;
+    }
+
+    footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* responsive */
+    @media (max-width:640px){
+      .logo{ width:44px;height:44px;font-size:16px}
+      .container{ padding:14px }
+      .search-wrap{ flex-basis:100% }
+      header{ flex-direction:column; align-items:flex-start; gap:10px }
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="page-title">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">TZ</div>
+        <div>
+          <h1 id="page-title">Truzone — Privacy</h1>
+          <div class="meta">Detailed privacy statement for the Truzone social media app</div>
+          <div class="last-updated small">Last updated: <span id="lastUpdated">[Put date here]</span></div>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <button class="btn" id="printBtn" title="Print privacy">🖨 Print</button>
+        <button class="btn" id="downloadBtn" title="Download privacy (TXT)">⬇ Download</button>
+        <button class="btn primary" id="copyBtn" title="Copy privacy text to clipboard">📋 Copy</button>
+      </div>
+    </header>
+
+    <div class="toolbar" role="region" aria-label="Policy tools">
+      <div class="search-wrap">
+        <input type="search" id="searchInput" class="search" placeholder="Search inside the privacy statement (e.g., 'location', 'delete', 'children')" aria-label="Search privacy text" />
+        <div class="small" id="searchCount" aria-live="polite"></div>
+      </div>
+      <div class="small" style="align-self:center">Printable · Copyable · Downloadable</div>
+    </div>
+
+    <article class="policy" id="policyArticle" lang="en">
+      <section class="intro" aria-labelledby="intro-heading">
+        <div class="lead">
+          <strong id="intro-heading">Privacy statement — Truzone</strong>
+          <p class="small" style="margin-top:8px">
+            Truzone respects your privacy. This statement explains the types of information we collect when you use Truzone, how we use that information, who we share it with, how we protect it, and the choices you have.
+          </p>
+        </div>
+      </section>
+
+      <!-- Full privacy text arranged in <details> for long content -->
+      <details open>
+        <summary>
+          <span>1. Information We Collect</span>
+          <span class="small">Account • Content • Device • Location • Cookies</span>
+        </summary>
+        <div class="section-body" id="section-1">
+          <p><strong>Account and Registration Data</strong><br>
+          When you create an account on Truzone, we may collect information you provide such as your username, email address, phone number, password, and optional profile details (bio, profile picture, interests).</p>
+
+          <p><strong>User Content</strong><br>
+          Any content you share on Truzone — posts, photos, videos, messages, comments, likes, and interactions — will be stored and may be visible to others based on your privacy settings. This content is considered user-generated content.</p>
+
+          <p><strong>Device and Technical Information</strong><br>
+          We automatically collect technical information about the device and connection you use, such as your IP address, device type, operating system and version, app version, browser type, and usage logs (e.g., features used, timestamps).</p>
+
+          <p><strong>Location Data (Optional)</strong><br>
+          If you choose to enable location services, we may collect your device’s location to provide location-based features (e.g., nearby recommendations). You can disable location access at any time from your device settings.</p>
+
+          <p><strong>Cookies and Similar Technologies</strong><br>
+          Truzone may use cookies, local storage, and similar technologies to remember preferences, maintain sessions, personalize experience, and measure usage. You may control or disable cookies via your device or browser settings, but some features may require them.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>2. How We Use Your Information</span>
+          <span class="small">Service • Personalization • Safety • Notifications</span>
+        </summary>
+        <div class="section-body" id="section-2">
+          <p>We use collected information for the following purposes:</p>
+          <ul>
+            <li><strong>Provide and operate Truzone:</strong> to run the app, authenticate accounts, maintain profiles, deliver content, and support core functions.</li>
+            <li><strong>Personalize experience:</strong> to tailor your feed, recommendations, and suggested connections based on activity and preferences.</li>
+            <li><strong>Connect and share:</strong> to help you find and interact with friends, communities, and public content.</li>
+            <li><strong>Safety and fraud prevention:</strong> to detect abuse, spam, or malicious activity and to protect user safety and platform integrity.</li>
+            <li><strong>Communications:</strong> to send important account messages, security alerts, and (optionally) promotional messages — you may opt out of marketing communications.</li>
+            <li><strong>Analytics and improvement:</strong> to analyze trends, fix bugs, and enhance features and performance.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>3. Sharing of Information</span>
+          <span class="small">Users • Service Providers • Legal</span>
+        </summary>
+        <div class="section-body" id="section-3">
+          <p><strong>We do not sell your personal data.</strong> Truzone shares personal information only in limited situations:</p>
+          <ul>
+            <li><strong>With other users:</strong> information and content you post publicly or share with others will be visible to those users per your privacy settings.</li>
+            <li><strong>With service providers:</strong> trusted third-party providers (hosting, analytics, payment processors, email delivery) that process data on our behalf under contract.</li>
+            <li><strong>For legal reasons:</strong> when required by law, court order, or to respond to legal requests, or to protect the rights, safety, or property of Truzone, its users, or the public.</li>
+            <li><strong>Business transfers:</strong> in the event of a merger, sale, or acquisition, user data may be transferred as part of the business assets, subject to notice and contractual protection.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>4. Data Security</span>
+          <span class="small">Measures • Risks</span>
+        </summary>
+        <div class="section-body" id="section-4">
+          <p>We implement reasonable technical and organizational measures to protect data from unauthorized access, loss, alteration, or disclosure (for example, encryption of data in transit and secure server configurations). However, no method of transmission or storage is entirely secure. By using Truzone you accept this inherent risk and agree we will take commercially reasonable steps to protect your data.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>5. Your Choices and Rights</span>
+          <span class="small">Access • Edit • Delete • Preferences</span>
+        </summary>
+        <div class="section-body" id="section-5">
+          <p>You have control over the information associated with your account:</p>
+          <ul>
+            <li><strong>Access & edit:</strong> you can view and update many of your account details from the app settings.</li>
+            <li><strong>Delete content:</strong> you may delete posts, comments, and other content you created.</li>
+            <li><strong>Deactivate/delete account:</strong> you can temporarily deactivate or permanently delete your Truzone account; after deletion we will remove or anonymize your personal data except where retention is required by law.</li>
+            <li><strong>Communications:</strong> opt-out of marketing messages using the unsubscribe link or in-app notification settings.</li>
+            <li><strong>Location:</strong> toggle location permissions through your device settings.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>6. Data Retention</span>
+          <span class="small">Duration • Deletion</span>
+        </summary>
+        <div class="section-body" id="section-6">
+          <p>We retain personal information only as long as necessary to provide services, comply with legal obligations, resolve disputes, and enforce agreements. If you delete your account, we will delete or anonymize your data within a reasonable period, except where we are required to retain certain records for legal, tax, or security reasons.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>7. Children’s Privacy</span>
+          <span class="small">Under 13</span>
+        </summary>
+        <div class="section-body" id="section-7">
+          <p>Truzone is not intended for children under 13. We do not knowingly collect information from children under 13. If we discover that we have unintentionally collected data from a child under 13, we will take steps to delete that data promptly. If you suspect your child under 13 has an account, contact us and we will assist.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>8. Updates to Privacy</span>
+          <span class="small">Changes • Notification</span>
+        </summary>
+        <div class="section-body" id="section-8">
+          <p>We may update this Privacy statement periodically to reflect changes to our practices or legal requirements. When we update, we will post a revised statement in the app or on our website and update the “Last updated” date at the top. Continued use of Truzone after changes constitutes your acceptance of the updated policy.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>9. Contact Us</span>
+          <span class="small">Support email • Phone (optional)</span>
+        </summary>
+        <div class="section-body" id="section-9">
+          <p>If you have questions or requests about your data or this privacy statement, contact Truzone support:</p>
+          <p class="small">
+            Email: <strong>support@truzone.example</strong><br>
+            Phone: <strong>[Optional phone number]</strong>
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>10. Extra Notes (optional)</span>
+          <span class="small">Third-party services, analytics, payments</span>
+        </summary>
+        <div class="section-body" id="section-10">
+          <p>If Truzone integrates third-party services (for example, analytics, cloud hosting, advertising, or payment processors), those providers may collect or process information on our behalf. We will disclose such integrations clearly in a future update and require contractual protections to ensure data is processed securely and only for permitted purposes.</p>
+        </div>
+      </details>
+
+      <div style="margin-top:12px; color:var(--muted); font-size:13px">
+        <strong>Note:</strong> This privacy statement is a comprehensive “Privacy” document for Truzone and may be adapted into a formal Privacy Policy page with legal boilerplate (Effective Date, jurisdiction, GDPR/NDPR/CCPA references) if you want to publish it to app stores or your website.
+      </div>
+    </article>
+
+    <footer>
+      <div class="small">Truzone · Privacy — Ready to publish</div>
+      <div class="small">Made for Truzone • © <span id="currentYear"></span></div>
+    </footer>
+  </main>
+
+  <script>
+    // Populate dates
+    (function(){
+      const lastUpdatedEl = document.getElementById('lastUpdated');
+      const yearEl = document.getElementById('currentYear');
+      const today = new Date();
+      // Default: replace manually or keep placeholder
+      lastUpdatedEl.textContent = '[Put date here]';
+      yearEl.textContent = today.getFullYear();
+    })();
+
+    // Copy policy text to clipboard
+    document.getElementById('copyBtn').addEventListener('click', async function(){
+      const article = document.getElementById('policyArticle');
+      // Extract plain text
+      const text = article.innerText.replace(/\\s+$/m, '\\n');
+      try{
+        await navigator.clipboard.writeText(text);
+        this.textContent = '✅ Copied';
+        setTimeout(()=> this.textContent = '📋 Copy', 1600);
+      }catch(e){
+        alert('Copy failed — your browser may block clipboard access. You can select and copy manually.');
+      }
+    });
+
+    // Download as .txt
+    document.getElementById('downloadBtn').addEventListener('click', function(){
+      const article = document.getElementById('policyArticle');
+      const text = article.innerText.replace(/\\s+$/m, '\\n');
+      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'truzone-privacy.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      this.textContent = '⬇ Saved';
+      setTimeout(()=> this.textContent = '⬇ Download', 1400);
+    });
+
+    // Print
+    document.getElementById('printBtn').addEventListener('click', function(){
+      window.print();
+    });
+
+    // Search inside policy
+    const searchInput = document.getElementById('searchInput');
+    const searchCountEl = document.getElementById('searchCount');
+    let lastMatches = [];
+    searchInput.addEventListener('input', function(){
+      const q = (this.value || '').trim();
+      const details = Array.from(document.querySelectorAll('details'));
+      // Clear previous highlights
+      document.querySelectorAll('mark.tr-highlight').forEach(n=> {
+        const parent = n.parentNode;
+        parent.replaceChild(document.createTextNode(n.textContent), n);
+      });
+
+      if(!q){
+        searchCountEl.textContent = '';
+        details.forEach(d=> d.open = false); // collapse all when empty
+        return;
+      }
+
+      const regex = new RegExp(q.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&'), 'ig'); // escape q
+      let total = 0;
+      details.forEach(d=>{
+        const body = d.querySelector('.section-body');
+        if(!body) return;
+        const orig = body.textContent;
+        const matches = (orig.match(regex) || []).length;
+        if(matches > 0){
+          d.open = true;
+          total += matches;
+          // highlight occurrences by replacing innerHTML safely
+          // simple approach: split and join with mark (works for this static text)
+          const highlighted = orig.replace(regex, match => `<mark class="tr-highlight">${match}</mark>`);
+          body.innerHTML = highlighted.replace(/\\n/g, '<br/>');
+        } else {
+          // if no match, reset textContent to original (remove previous highlights if any)
+          body.textContent = orig;
+        }
+      });
+
+      searchCountEl.textContent = total ? total + ' match' + (total>1 ? 'es' : '') : 'No matches';
+    });
+
+    // Accessibility: allow keyboard open/close details with Enter
+    document.querySelectorAll('summary').forEach(s=>{
+      s.tabIndex = 0;
+      s.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          const d = this.parentElement;
+          d.open = !d.open;
+        }
+      });
+    });
+
+    // Ensure policy is selectable and readable for copying
+    // no further JS needed
+  </script>
+</body>
+</html>
