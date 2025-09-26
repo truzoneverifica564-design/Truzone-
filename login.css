@@ -1,0 +1,189 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlights */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #000000; /* Pure dark background */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 350px;
+  /* background removed */
+  /* box-shadow removed */
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 25px;
+  border-radius: 50px; /* round edges */
+  background: #111; /* subtle dark background inside */
+  color: white;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 18px;
+  border: 2px solid #333; /* neutral border */
+  transition: all 0.3s ease-in-out;
+  text-align: center; /* center text for code inputs */
+}
+
+.input:focus,
+.code-input:focus {
+  border-color: #ff2d75; /* pink focus */
+  box-shadow: 0 0 8px rgba(255, 45, 117, 0.7);
+}
+
+.input::placeholder {
+  color: #888;
+}
+.input-group input:focus {
+  border-color: #ff4d79;
+  box-shadow: 0 0 8px rgba(255, 46, 99, 0.6);
+}
+
+.password-group {
+  display: flex;
+  align-items: center;
+}
+
+.password-group input {
+  flex: 1;
+}
+
+.password-group .toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #ff2e63;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.options .forgot {
+  color: #ff2e63;
+  text-decoration: none;
+}
+
+.btn {
+  background: linear-gradient(90deg, #ff2e63, #8a2be2);
+  border: none;
+  color: #fff;
+  padding: 14px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 10px rgba(255, 45, 117, 0.8);
+}
+
+.link {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 10px;
+  color: #aaa;
+}
+
+.link a {
+  color: #ff2e63;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Notification Container */
+.notification {
+  position: fixed;
+  top: 20px; /* change to bottom:20px; if you want bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 280px;
+  max-width: 400px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  background: #222; /* Default background */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Show state */
+.notification.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Success style */
+.notification.success {
+  background: #2ecc71; /* Green */
+}
+
+/* Error style */
+.notification.error {
+  background: #e74c3c; /* Red */
+}
+
+/* Info style */
+.notification.info {
+  background: #3498db; /* Blue */
+}
+
+/* Warning style */
+.notification.warning {
+  background: #f39c12; /* Orange */
+}
