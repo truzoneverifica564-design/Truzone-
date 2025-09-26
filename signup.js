@@ -1,25 +1,24 @@
+// =========================
 // ✅ Notification function
+// =========================
 function showNotification(message, type = "info") {
   let notify = document.getElementById("notify");
-
-  // Create element if not exist
   if (!notify) {
     notify = document.createElement("div");
     notify.id = "notify";
     notify.className = "notification";
     document.body.appendChild(notify);
   }
-
   notify.textContent = message;
   notify.className = `notification ${type} show`;
-
-  // Auto hide after 3s
   setTimeout(() => {
     notify.classList.remove("show");
   }, 3000);
 }
 
+// =========================
 // Toggle password visibility
+// =========================
 function togglePassword(id, el) {
   const input = document.getElementById(id);
   if (input.type === "password") {
@@ -31,7 +30,9 @@ function togglePassword(id, el) {
   }
 }
 
-// Keep page stable when input focused
+// =========================
+// Keep page stable on focus
+// =========================
 document.querySelectorAll("input").forEach(input => {
   input.addEventListener("focus", () => {
     setTimeout(() => {
@@ -42,6 +43,9 @@ document.querySelectorAll("input").forEach(input => {
   });
 });
 
+// =========================
+// Elements
+// =========================
 const spinner = document.getElementById('spinner');
 const signupBtn = document.getElementById('signup-btn');
 const signupForm = document.querySelector('.signup-container');
@@ -51,17 +55,26 @@ const verifyBtn = document.getElementById('verify-btn');
 const codeInputs = document.querySelectorAll('.code-input');
 const resendLink = document.getElementById('resend-code');
 
-let resendTimer = null; // store interval timer
+let resendTimer = null;
 
-// Simulate token check
+// =========================
+// Check token
+// =========================
 const token = localStorage.getItem('token');
 if (token) {
   console.log('Token found, skipping signup/login.');
   // window.location.href = "dashboard.html";
 }
 
+// =========================
+// API BASE URL
+// =========================
+const API_BASE = "https://signup-backend-f8u7.onrender.com";
+
+// =========================
 // SIGNUP BUTTON CLICK
-signupBtn.addEventListener('click', () => {
+// =========================
+signupBtn.addEventListener('click', async () => {
   const firstName = document.querySelector("input[placeholder='First Name']").value.trim();
   const lastName = document.querySelector("input[placeholder='Last Name']").value.trim();
   const email = document.querySelector("input[placeholder='Email']").value.trim();
@@ -83,18 +96,36 @@ signupBtn.addEventListener('click', () => {
 
   spinner.style.display = 'flex';
 
-  setTimeout(() => {
+  try {
+    // Call backend signup
+    const res = await fetch(`${API_BASE}/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firstName, lastName, email, password })
+    });
+    const data = await res.json();
     spinner.style.display = 'none';
-    signupForm.style.display = 'none';
-    verificationForm.style.display = 'block';
-    userEmailSpan.textContent = email;
-    codeInputs[0].focus();
-    startResendCountdown();
-    showNotification("Verification code sent to your email 📩", "info");
-  }, 2000);
+
+    if (data.success) {
+      signupForm.style.display = 'none';
+      verificationForm.style.display = 'block';
+      userEmailSpan.textContent = email;
+      codeInputs[0].focus();
+      startResendCountdown();
+      showNotification("Verification code sent to your email 📩", "info");
+    } else {
+      showNotification(data.message || "Signup failed!", "error");
+    }
+  } catch (err) {
+    spinner.style.display = 'none';
+    console.error(err);
+    showNotification("Network error, try again!", "error");
+  }
 });
 
+// =========================
 // AUTO-FOCUS for verification code inputs
+// =========================
 codeInputs.forEach((input, index) => {
   input.addEventListener('input', () => {
     if (input.value.length === 1 && index < codeInputs.length - 1) {
@@ -108,8 +139,10 @@ codeInputs.forEach((input, index) => {
   });
 });
 
+// =========================
 // VERIFY BUTTON CLICK
-verifyBtn.addEventListener('click', () => {
+// =========================
+verifyBtn.addEventListener('click', async () => {
   const code = Array.from(codeInputs).map(i => i.value).join('');
   if (code.length < 6) {
     showNotification("Enter the full 6-digit code!", "warning");
@@ -117,17 +150,33 @@ verifyBtn.addEventListener('click', () => {
   }
 
   spinner.style.display = 'flex';
-  setTimeout(() => {
+  try {
+    const res = await fetch(`${API_BASE}/verify-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userEmailSpan.textContent, code })
+    });
+    const data = await res.json();
     spinner.style.display = 'none';
-    showNotification("Verification successful ✅ Account activated!", "success");
-    localStorage.setItem('token', 'demo-token');
-    // window.location.href = "dashboard.html";
-  }, 2000);
+
+    if (data.success) {
+      showNotification("Verification successful ✅ Account activated!", "success");
+      localStorage.setItem('token', data.token); // backend returns JWT or demo-token
+      // window.location.href = "dashboard.html";
+    } else {
+      showNotification(data.message || "Invalid code!", "error");
+    }
+  } catch (err) {
+    spinner.style.display = 'none';
+    console.error(err);
+    showNotification("Network error, try again!", "error");
+  }
 });
 
+// =========================
 // RESEND CODE CLICK WITH 20-SECOND COUNTDOWN
+// =========================
 function startResendCountdown() {
-  // Clear any previous timer
   if (resendTimer) clearInterval(resendTimer);
 
   let countdown = 20;
@@ -145,9 +194,22 @@ function startResendCountdown() {
   }, 1000);
 }
 
-// Resend link click
-resendLink.addEventListener('click', (e) => {
+// =========================
+// RESEND LINK CLICK
+// =========================
+resendLink.addEventListener('click', async (e) => {
   e.preventDefault();
-  showNotification("New verification code sent 📩", "info");
-  startResendCountdown(); // restart countdown
+  try {
+    const email = userEmailSpan.textContent;
+    await fetch(`${API_BASE}/resend-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    showNotification("New verification code sent 📩", "info");
+    startResendCountdown();
+  } catch (err) {
+    console.error(err);
+    showNotification("Network error, try again!", "error");
+  }
 });
