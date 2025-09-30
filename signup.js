@@ -69,7 +69,8 @@ if (token) {
 // =========================
 // API BASE URL
 // =========================
-const API_BASE = "https://signup-backend-f8u7.onrender.com";
+const API_BASE = "https://signup-backend-co2x.onrender.com"; // main backend
+const WORKER_BASE = "https://signup-backend-1-ouct.onrender.com"; // worker server if needed
 
 // =========================
 // SIGNUP BUTTON CLICK
@@ -161,7 +162,7 @@ verifyBtn.addEventListener('click', async () => {
 
     if (data.success) {
       showNotification("Verification successful ✅ Account activated!", "success");
-      localStorage.setItem('token', data.token); // backend returns JWT or demo-token
+      localStorage.setItem('token', data.token); // permanent token
       // window.location.href = "dashboard.html";
     } else {
       showNotification(data.message || "Invalid code!", "error");
